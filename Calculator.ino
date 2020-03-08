@@ -27,9 +27,14 @@ void setup() {
 int tenDigit1 = 0;
 int oneDigit1 = 0;
 
+int tenDigit2 = 0;
+int oneDigit2 = 0;
+
 void loop() {
   int firstTenState = digitalRead(firstTenDigit);
   int firstOneState = digitalRead(firstOnesDigit);
+  int secondTenState = digitalRead(secondTensDigit);
+  int secondOneState = digitalRead(secondOnesDigit);
   
     if(firstTenState == HIGH){
      tenDigit1 = calculate(tenDigit1);
@@ -39,6 +44,16 @@ void loop() {
     if(firstOneState == HIGH){
      oneDigit1 = calculate(oneDigit1);
      display(oneDigit1, 1,0);
+    }
+
+    if(secondTenState == HIGH){
+     tenDigit2 = calculate(tenDigit2);
+     display(tenDigit2, 14,0);
+    }
+
+    if(secondOneState == HIGH){
+     oneDigit2 = calculate(oneDigit2);
+     display(oneDigit2, 15,0);
     }
     
 }
