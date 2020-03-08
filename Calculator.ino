@@ -25,19 +25,43 @@ void setup() {
 }
 
 int tenDigit1 = 0;
+int oneDigit1 = 0;
 
 void loop() {
-  lcd.setCursor(0,0);
-   lcd.print("hello");
   int firstTenState = digitalRead(firstTenDigit);
-  if(firstTenState == HIGH){
-    if(tenDigit1 < 9){
-      tenDigit1++;
-    }else{
-      tenDigit1 = 0;
+  int firstOneState = digitalRead(firstOnesDigit);
+  
+    if(firstTenState == HIGH){
+     tenDigit1 = calculate(tenDigit1);
+     display(tenDigit1, 0,0);
     }
-    delay(250);
-    Serial.println(tenDigit1);
-  }
 
+    if(firstOneState == HIGH){
+     oneDigit1 = calculate(oneDigit1);
+     display(oneDigit1, 1,0);
+    }
+    
+}
+
+void check(int state, int digit, int curPos1, int curPos2){
+  if(state == HIGH){
+     digit = calculate(digit);
+     display(digit, curPos1, curPos2);
+    }
+}
+
+int calculate(int digit){
+      if(digit < 9){
+         digit++;
+      }else{
+        digit = 0;
+      }
+    return digit;
+ }
+
+void display(int digit, int curPos1, int curPos2){
+      delay(250);
+      Serial.println(digit);
+      lcd.setCursor(curPos1,curPos2);
+      lcd.print(digit);
 }
