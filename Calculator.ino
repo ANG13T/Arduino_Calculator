@@ -30,11 +30,15 @@ int oneDigit1 = 0;
 int tenDigit2 = 0;
 int oneDigit2 = 0;
 
+int operatorDigit = 0;
+String operatorString = "+";
+
 void loop() {
   int firstTenState = digitalRead(firstTenDigit);
   int firstOneState = digitalRead(firstOnesDigit);
   int secondTenState = digitalRead(secondTensDigit);
   int secondOneState = digitalRead(secondOnesDigit);
+  int operatorState = digitalRead(operation);
   
     if(firstTenState == HIGH){
      tenDigit1 = calculate(tenDigit1);
@@ -56,6 +60,27 @@ void loop() {
      display(oneDigit2, 15,0);
     }
     
+    if(operatorState == HIGH){
+      delay(250);
+      operatorDigit = determineOperator(operatorDigit);
+      if(operatorDigit == 0){
+        operatorString = "+";
+      }
+      if(operatorDigit == 1){
+        operatorString = "-";
+      }
+      if(operatorDigit == 2){
+        operatorString = "*";
+      }
+      if(operatorDigit == 3){
+        operatorString = "/";
+      }
+      Serial.println(operatorString);
+      lcd.setCursor(7,0);
+      lcd.print(operatorString);
+        Serial.println("boom");
+    }
+    
 }
 
 void check(int state, int digit, int curPos1, int curPos2){
@@ -73,6 +98,15 @@ int calculate(int digit){
       }
     return digit;
  }
+
+int determineOperator(int operation){
+  if(operation < 4){
+         operation++;
+      }else{
+        operation = 0;
+    }
+    return operation;
+}
 
 void display(int digit, int curPos1, int curPos2){
       delay(250);
