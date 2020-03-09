@@ -21,6 +21,17 @@ void setup() {
     
    lcd.init(); // Initializes the interface to the LCD screen, and specifies the dimensions (width and height) of the display } 
    lcd.backlight();
+
+   lcd.setCursor(0,0);
+   lcd.print(0);
+   lcd.setCursor(1,0);
+   lcd.print(0);
+   lcd.setCursor(7,0);
+   lcd.print("+");
+   lcd.setCursor(14,0);
+   lcd.print(0);
+   lcd.setCursor(15,0);
+   lcd.print(0);
    
 }
 
@@ -39,6 +50,7 @@ void loop() {
   int secondTenState = digitalRead(secondTensDigit);
   int secondOneState = digitalRead(secondOnesDigit);
   int operatorState = digitalRead(operation);
+  int enterState = digitalRead(enterButton);
   
     if(firstTenState == HIGH){
      tenDigit1 = calculate(tenDigit1);
@@ -79,6 +91,11 @@ void loop() {
       lcd.setCursor(7,0);
       lcd.print(operatorString);
         Serial.println("boom");
+    }
+
+    if(enterState == HIGH){
+      delay(250);
+      Serial.println("boom");
     }
     
 }
