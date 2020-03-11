@@ -32,6 +32,9 @@ void setup() {
    lcd.print(0);
    lcd.setCursor(15,0);
    lcd.print(0);
+
+   lcd.setCursor(4,1);
+   lcd.print("=");
    
 }
 
@@ -99,6 +102,8 @@ void loop() {
       double total = calculateNumber(tenDigit1, oneDigit1, tenDigit2, oneDigit2, operatorString);
       Serial.println("calculated number is: ");
       Serial.println(total);
+      lcd.setCursor(6,1);
+      lcd.print(total);
     }
     
 }
