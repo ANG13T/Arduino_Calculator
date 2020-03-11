@@ -96,6 +96,9 @@ void loop() {
     if(enterState == HIGH){
       delay(250);
       Serial.println("boom");
+      double total = calculateNumber(tenDigit1, oneDigit1, tenDigit2, oneDigit2, operatorString);
+      Serial.println("calculated number is: ");
+      Serial.println(total);
     }
     
 }
@@ -130,4 +133,26 @@ void display(int digit, int curPos1, int curPos2){
       Serial.println(digit);
       lcd.setCursor(curPos1,curPos2);
       lcd.print(digit);
+}
+
+double calculateNumber(int tenDigit1, int oneDigit1, int tenDigit2, int oneDigit2, String operation){
+  double t1 = tenDigit1 * 10;
+  double t2 = tenDigit2 * 10;
+  double firstNum = t1 + oneDigit1;
+  double secNum = t2 + oneDigit2;
+  if(operation == "+"){
+    return (firstNum + secNum);
+  }
+
+  if(operation == "-"){
+    return (firstNum - secNum);
+  }
+
+  if(operation == "/"){
+    return (firstNum / secNum);
+  }
+
+  if(operation == "*"){
+    return (firstNum * secNum);
+  }
 }
